@@ -1,0 +1,15 @@
+{
+  "name": "backend-du-futur",
+  "version": "1.0.0",
+  "description": "**Notre tout premier projet avec GitHub**\r Ceci est un test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "xo": "^0.58.0"
+  }
+}
