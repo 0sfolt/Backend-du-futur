@@ -1,36 +1,38 @@
-  {
+{
   "name": "backend-du-futur",
   "version": "1.0.0",
   "description": "**Notre tout premier projet avec GitHub**\r Ceci est un test",
-  "main": "extraction-data.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "start": "node extraction-data.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "xo": "^0.58.0"
-    },
-    "dependencies": {
-      "ramda": "^0.29.1"
-    },
-    "xo": {
-      "space": 2,
-      "prettier": true,
-      "rules": {
-        "unicorn/no-fn-reference-in-iterator": 0,
-        "unicorn/no-array-callback-reference": 0,
-        "unicorn/no-array-method-this-argument": 0,
-        "unicorn/no-array-reduce": 0,
-        "unicorn/no-array-for-each": 0
-      }
-    },
-    "prettier": {
-      "bracketSpacing": false,
-      "singleQuote": true,
-      "trailingComma": "none"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "xo": "^0.58.0"
+
+  },
+  "dependencies": {
+    "koa": "^2.15.2"
+  },
+  "dependencies": {
+    "ramda": "^0.29.1"
+  },
+  "xo": {
+    "space": 2,
+    "prettier": true,
+    "rules": {
+      "unicorn/no-fn-reference-in-iterator": 0,
+      "unicorn/no-array-callback-reference": 0,
+      "unicorn/no-array-method-this-argument": 0,
+      "unicorn/no-array-reduce": 0,
+      "unicorn/no-array-for-each": 0
     }
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
+}
