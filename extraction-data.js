@@ -1,5 +1,7 @@
 import * as R from "ramda";
 import data from"./dataset/meteo20ans.json" assert { type: 'json' };
+
+//Temperature
 const tempmin=data.daily.temperature_2m_min
 const tempmax=data.daily.temperature_2m_max
 const time=data.daily.time
