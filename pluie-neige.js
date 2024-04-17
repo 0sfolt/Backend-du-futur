@@ -15,6 +15,10 @@ var dayMaxSnowIndex= R.indexOf(dayMaxAmountSnow,snowfallSum );
 var dayMaxSnow =time[dayMaxSnowIndex];
 console.log(`Journée plus enneigée sur 20ans: ${dayMaxSnow}  avec ${dayMaxAmountSnow} cm de neige`);
 
+//Mois plus enneigé
+//boucle pour chaque mois
+//selectionné index Mois
+//
 
 //PLUIE
 // Journée plus de pluie
