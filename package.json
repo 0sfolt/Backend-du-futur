@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node extraction-data.js & node pluie-neige.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
