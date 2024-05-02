@@ -1,12 +1,16 @@
 import * as R from "ramda";
-import data from"./dataset/meteo20ans.json" assert { type: 'json' };
-import { max } from "ramda";
+import data from "./dataset/meteo20ans.json" assert {type: 'json'};
+import {max} from "ramda";
 
 const sunshine_duration = data.daily.sunshine_duration;
 const time = data.daily.time;
 
-const diffmin = function(a, b) { return a - b; };
-const diffmax = function(a, b) { return b - a; };
+const diffmin = function (a, b) {
+    return a - b;
+};
+const diffmax = function (a, b) {
+    return b - a;
+};
 
 const sortac = R.sort(diffmin);
 const sortdec = R.sort(diffmax);
@@ -15,16 +19,16 @@ const maxIndex = R.indexOf(sortdec(sunshine_duration)[0]);
 
 const byYear = (t) => {
     let i = -1;
-    return R.groupBy(function(){
+    return R.groupBy(function () {
         i = i + 1;
-        return time[i].slice(0,4);
+        return time[i].slice(0, 4);
     })(t);
 };
 const byMonthOfYear = (t) => {
     let i = -1;
-    return R.groupBy(function(){
+    return R.groupBy(function () {
         i = i + 1;
-        return time[i].slice(0,7);
+        return time[i].slice(0, 7);
     })(t);
 };
 
@@ -47,8 +51,6 @@ const formatTime = (duration) => {
         return parts.join(', ') + ' et ' + lastPart;
     }
 };
-
-
 
 
 const maxForEach = R.mapObjIndexed(R.reduce(R.max, -Infinity));
