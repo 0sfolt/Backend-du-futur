@@ -75,16 +75,14 @@ const sortedBySnowfallY = R.sortWith(
     R.toPairs(SumSnowPerYear),
 );
 
-////Pourcentage
-//nbr de jour de pluie sur 20ans
-console.log(snowfallSum)
-let numSnowDays = 0;
-const fn = R.cond([
-    [R.equals(0),   R.always(numSnowDays+=1)],
-    [R.equals(100), R.always('water boils at 100°C')],
-    [R.T,           temp => 'nothing special happens at ' + temp + '°C']
-]);
+////Pourcentage de neige
+function countWithCondition(liste, condition) {
+    return liste.filter(condition).length;
+}
+const isNonNull = (num) => num !== 0;
+const countSnowyDays= countWithCondition(snowfallSum,isNonNull)
 //Il a plu tata % du temps
+const percentSnow= (countSnowyDays/(snowfallSum.length))*100;
 
 //PLUIE///////////////////////////////////////////////////////////////////////////////////////////////
 //// Journée plus de pluie
@@ -113,7 +111,14 @@ const sortedByRainfallY = R.sortWith(
     [R.descend(R.last)],
     R.toPairs(SumRainPerYear),
 );
+////Pourcentage
 
+const countRainyDays= countWithCondition(rainSum,isNonNull)
+console.log(countRainyDays)
+//Il a plu tata % du temps
+const percentRain= (countRainyDays/(rainSum.length))*100;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log(`Journée la plus pluvieuse: ${dayDateExpress(dayMaxRain)} avec ${dayMaxAmountRain} mm de pluie`);
 console.log(`Top 3 des mois les plus pluvieux: 
             ${monthDateExpress(topThreeRainfall[0][0])} avec ${topThreeRainfall[0][1]} mm de pluie,
@@ -122,7 +127,8 @@ console.log(`Top 3 des mois les plus pluvieux:
 console.log(`L'année la plus pluvieuse: 
             L'année ${sortedByRainfallY[0][0]} avec ${sortedByRainfallY[0][1]} mm de pluie`);
 console.log(`L'année la moins pluvieuse: 
-            L'année ${sortedByRainfallY[20][0]} avec ${sortedByRainfallY[20][1]} mm de pluie`);
+            L'année ${sortedByRainfallY[20][0]} avec ${sortedByRainfallY[20][1]} mm de pluie \n`);
+console.log(`Au cours de ces 20 dernieres annees il a plu ${percentRain} % du temps \n`);
 
 console.log(`Journée plus enneigée sur 20ans: ${dayDateExpress(dayMaxSnow)}  avec ${dayMaxAmountSnow} cm de neige`);
 console.log(`Top 3 des mois les plus enneigés: 
@@ -132,4 +138,5 @@ console.log(`Top 3 des mois les plus enneigés:
 console.log(`L'année la plus enneigée: 
             L'année ${sortedBySnowfallY[0][0]} avec ${sortedBySnowfallY[0][1]} cm de neige`);
 console.log(`L'année la moins enneigée: 
-            L'année ${sortedBySnowfallY[20][0]} avec ${sortedBySnowfallY[20][1]} cm de neige`);
+            L'année ${sortedBySnowfallY[20][0]} avec ${sortedBySnowfallY[20][1]} cm de neige \n`);
+console.log(`Au cours de ces 20 dernieres annees il a neigé ${percentSnow} % du temps`);
