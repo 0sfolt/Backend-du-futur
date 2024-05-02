@@ -1,55 +1,57 @@
 import * as R from "ramda";
-import data from"./dataset/meteo20ans.json" assert { type: 'json' };
+import data from "./dataset/meteo20ans.json" assert {type: 'json'};
 
 //Import data
-const snowfallSum=data.daily.snowfall_sum
-const rainSum=data.daily.rain_sum
-const precipitationSum=data.daily.precipitation_sum
-const time=data.daily.time
+const snowfallSum = data.daily.snowfall_sum
+const rainSum = data.daily.rain_sum
+const precipitationSum = data.daily.precipitation_sum
+const time = data.daily.time
 
 //FONCTIONS DE TRIE
 //Trier la liste par années sur 4ans
-const byYear = (t)=>{
-    let i=-1;
-    return R.groupBy(function(){
-        i=i+1;
-        return time[i].slice(0,4)
+const byYear = (t) => {
+    let i = -1;
+    return R.groupBy(function () {
+        i = i + 1;
+        return time[i].slice(0, 4)
     })(t);
 }
 
 //Trier cette liste par mois
-const byMonthOfYear=(t)=>{
-    let i=-1;
-    return R.groupBy(function(){
-        i=i+1;
-        return time[i].slice(0,7)
+const byMonthOfYear = (t) => {
+    let i = -1;
+    return R.groupBy(function () {
+        i = i + 1;
+        return time[i].slice(0, 7)
     })(t);
 }
+
 //Exprimer date annee et mois
-function monthDateExpress (valeur){
+function monthDateExpress(valeur) {
     let [year, month] = valeur.split('-');
     month = Number(month);
-    const monthNames = ["","Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin",
+    const monthNames = ["", "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin",
         "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"
     ];
     return `En ${monthNames[month]}, ${year} `
 }
 
 //Exprimer date annee et mois et jour
-function dayDateExpress (valeur){
+function dayDateExpress(valeur) {
     let [year, month, day] = valeur.split('-');
     month = Number(month);
-    const monthNames = ["","Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin",
+    const monthNames = ["", "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin",
         "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"
     ];
     return `Le ${day} ${monthNames[month]}, ${year} `
 }
+
 //SNOW///////////////////////////////////////////////////////////////////////////////////////////////
 ////Journee plus de neige
 //Trouver le max dans une liste et recuperer le jour associé
-var dayMaxAmountSnow = R.reduce(R.max, -Infinity,snowfallSum);
-var dayMaxSnowIndex= R.indexOf(dayMaxAmountSnow,snowfallSum );
-var dayMaxSnow =time[dayMaxSnowIndex];
+var dayMaxAmountSnow = R.reduce(R.max, -Infinity, snowfallSum);
+var dayMaxSnowIndex = R.indexOf(dayMaxAmountSnow, snowfallSum);
+var dayMaxSnow = time[dayMaxSnowIndex];
 
 ////3 Mois plus de neige
 //Somme de neige par mois
@@ -79,16 +81,17 @@ const sortedBySnowfallY = R.sortWith(
 function countWithCondition(liste, condition) {
     return liste.filter(condition).length;
 }
+
 const isNonNull = (num) => num !== 0;
-const countSnowyDays= countWithCondition(snowfallSum,isNonNull)
+const countSnowyDays = countWithCondition(snowfallSum, isNonNull)
 //Il a plu tata % du temps
-const percentSnow= (countSnowyDays/(snowfallSum.length))*100;
+const percentSnow = (countSnowyDays / (snowfallSum.length)) * 100;
 
 //PLUIE///////////////////////////////////////////////////////////////////////////////////////////////
 //// Journée plus de pluie
-var dayMaxAmountRain = R.reduce(R.max, -Infinity,rainSum);
-var dayMaxRainIndex= R.indexOf(dayMaxAmountRain,rainSum );
-var dayMaxRain =time[dayMaxRainIndex];
+var dayMaxAmountRain = R.reduce(R.max, -Infinity, rainSum);
+var dayMaxRainIndex = R.indexOf(dayMaxAmountRain, rainSum);
+var dayMaxRain = time[dayMaxRainIndex];
 
 ////Top 3 Mois plus de pluie
 //Somme de pluie par mois
@@ -113,10 +116,10 @@ const sortedByRainfallY = R.sortWith(
 );
 ////Pourcentage
 
-const countRainyDays= countWithCondition(rainSum,isNonNull)
+const countRainyDays = countWithCondition(rainSum, isNonNull)
 console.log(countRainyDays)
 //Il a plu tata % du temps
-const percentRain= (countRainyDays/(rainSum.length))*100;
+const percentRain = (countRainyDays / (rainSum.length)) * 100;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log(`Journée la plus pluvieuse: ${dayDateExpress(dayMaxRain)} avec ${dayMaxAmountRain} mm de pluie`);
